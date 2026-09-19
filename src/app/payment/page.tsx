@@ -99,7 +99,7 @@ export default function PaymentPage({ searchParams }: PageProps) {
           {/* Action Buttons */}
           <div className="space-y-3">
             <button
-              onClick={() => router.push("/")}
+              onClick={() => router.push(`/delivery?total=${totalPrice}&items=${itemCount}`)}
               className="w-full bg-[#EC6530] text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition"
             >
               Pembayaran Selesai
