@@ -11,6 +11,28 @@
   --font-sans: var(--font-inter);
   --font-sora: var(--font-sora);
   --font-inter: var(--font-inter);
+
+  /* Brand design tokens */
+  --color-brand-bg: #fafaf8;
+  --color-brand-backdrop: #edebe4;
+  --color-brand-brown: #4a3527;
+  --color-brand-brown-light: #5c4433;
+  --color-brand-tan: #c9b8a8;
+  --color-brand-tan-light: #d9c7b8;
+  --color-brand-accent: #d97757;
+  --color-brand-accent-soft: #fbe8df;
+  --color-brand-surface: #f5f1ea;
+  --color-brand-ink: #1c1c1a;
+  --color-brand-muted: #6f6c66;
+  --color-brand-muted-light: #8b887f;
+  --color-brand-chip: #55534d;
+  --color-brand-border: #e5e3dd;
+  --color-brand-border-light: #eeede7;
+  --color-brand-muted-bg: #f0efea;
+  --color-brand-muted-icon: #b5b2a9;
+  --color-brand-success: #4e9a6a;
+  --color-brand-success-bg: #eaf4ec;
+  --color-brand-success-border: #bfe0c8;
 }
 
 body {

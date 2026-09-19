@@ -1,13 +1,7 @@
-import PaymentClient from "@/components/PaymentClient";
+import PaymentClient from "@/components/payment/PaymentClient";
+import type { CartItem } from "@/types";
 
 export const dynamic = "force-dynamic";
-
-export interface InvoiceItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-}
 
 interface PageProps {
   searchParams: Promise<{
@@ -22,7 +16,7 @@ export default async function PaymentPage({ searchParams }: PageProps) {
   const totalPrice = params.total || "0";
   const itemCount = params.items || "0";
 
-  let cartItems: InvoiceItem[] = [];
+  let cartItems: CartItem[] = [];
   if (params.cart) {
     try {
       cartItems = JSON.parse(params.cart);

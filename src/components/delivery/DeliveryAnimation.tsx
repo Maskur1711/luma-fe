@@ -4,15 +4,9 @@ import { Building, Home } from "lucide-react";
 
 export default function DeliveryAnimation() {
   return (
-    <div
-      className="w-full h-64 rounded-xl overflow-hidden relative"
-      style={{ background: "linear-gradient(180deg, #FBE8DF 0%, #FAF6F0 60%, #FFFFFF 100%)" }}
-    >
+    <div className="w-full h-64 rounded-xl overflow-hidden relative bg-[linear-gradient(180deg,var(--color-brand-accent-soft)_0%,#FAF6F0_60%,#FFFFFF_100%)]">
       {/* Top decoration */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "linear-gradient(180deg, rgba(217,119,87,0.08) 0%, transparent 60%)" }}
-      ></div>
+      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(180deg,rgba(217,119,87,0.08)_0%,transparent_60%)]"></div>
 
       {/* Road base */}
       <div className="absolute bottom-24 w-full h-2 bg-gradient-to-r from-gray-300 via-gray-400 to-gray-300 shadow-md"></div>
@@ -35,13 +29,10 @@ export default function DeliveryAnimation() {
 
       {/* Restaurant */}
       <div className="absolute left-8 bottom-32 z-10">
-        <div
-          className="w-14 h-14 rounded-lg flex items-center justify-center shadow-lg"
-          style={{ background: "#D97757" }}
-        >
+        <div className="w-14 h-14 rounded-lg flex items-center justify-center shadow-lg bg-brand-accent">
           <Building size={28} className="text-white" />
         </div>
-        <p className="text-xs font-semibold mt-2 text-center" style={{ color: "#4A3527" }}>Resto</p>
+        <p className="text-xs font-semibold mt-2 text-center text-brand-brown">Resto</p>
       </div>
 
       {/* Animated Delivery Bike - SMOOTH */}
@@ -94,23 +85,17 @@ export default function DeliveryAnimation() {
 
       {/* Home destination */}
       <div className="absolute right-8 bottom-32 z-10">
-        <div
-          className="w-14 h-14 rounded-lg flex items-center justify-center shadow-lg"
-          style={{ background: "#EAF4EC", border: "2px solid #BFE0C8" }}
-        >
-          <Home size={28} color="#4E9A6A" />
+        <div className="w-14 h-14 rounded-lg flex items-center justify-center shadow-lg bg-brand-success-bg border-2 border-brand-success-border">
+          <Home size={28} className="text-brand-success" />
         </div>
-        <p className="text-xs font-semibold mt-2 text-center" style={{ color: "#4A3527" }}>Rumah</p>
+        <p className="text-xs font-semibold mt-2 text-center text-brand-brown">Rumah</p>
       </div>
 
       {/* Status badge */}
       <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
-        <div
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full shadow-lg"
-          style={{ background: "#FFFFFF", border: "1px solid #EEEDE7" }}
-        >
-          <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#D97757" }}></div>
-          <span className="text-sm font-semibold" style={{ color: "#1C1C1A" }}>Dalam Perjalanan</span>
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full shadow-lg bg-white border border-brand-border-light">
+          <div className="w-2 h-2 rounded-full animate-pulse bg-brand-accent"></div>
+          <span className="text-sm font-semibold text-brand-ink">Dalam Perjalanan</span>
         </div>
       </div>
 
@@ -145,19 +130,6 @@ export default function DeliveryAnimation() {
           100% {
             transform: translateX(-100%);
           }
-        }
-
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.5;
-          }
-        }
-
-        .animate-pulse {
-          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
       `}</style>
     </div>
