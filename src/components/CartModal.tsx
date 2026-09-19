@@ -39,7 +39,7 @@ export default function CartModal({
         onClick={onClose}
       />
 
-      <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 z-50 max-w-2xl mx-auto w-full max-h-[80vh] overflow-y-auto">
+      <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl p-4 md:p-6 z-50 max-w-2xl mx-auto w-full max-h-[85vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold text-gray-900">
             Rincian Keranjang ({cartItems.length} item)
@@ -52,22 +52,22 @@ export default function CartModal({
           </button>
         </div>
 
-        <div className="space-y-4 mb-6">
+        <div className="space-y-3 mb-6">
           {cartItems.map((item) => (
             <div
               key={item.id}
-              className="bg-gray-50 border border-gray-200 rounded-lg p-4"
+              className="bg-gray-50 border border-gray-200 rounded-lg p-3"
             >
-              <div className="flex gap-4">
-                <div className="w-20 h-20 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <span className="text-3xl">🍽️</span>
+              <div className="flex gap-3">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-2xl md:text-3xl">🍽️</span>
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-gray-900 mb-1">
+                  <h4 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
                     {item.name}
                   </h4>
-                  <p className="text-sm text-gray-600 mb-2">
+                  <p className="text-xs md:text-sm text-gray-600 mb-2">
                     Rp {item.price.toLocaleString()}
                   </p>
 

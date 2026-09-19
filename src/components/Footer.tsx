@@ -6,8 +6,12 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
         <div>
           <h3 className="text-xl font-bold mb-4">Luma</h3>
-          <p className="text-sm opacity-90">
+          <p className="text-sm opacity-90 mb-3">
             Makanan berkualitas, harga terjangkau, diantar cepat ke rumah Anda.
+          </p>
+          <p className="text-sm opacity-90 flex items-center gap-2">
+            <MapPin size={16} />
+            Bandung, Indonesia
           </p>
         </div>
 
