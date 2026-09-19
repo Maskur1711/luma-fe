@@ -12,11 +12,13 @@ const products = [
   { id: 4, name: "Es Krim Vanilla", price: 12000, rating: 4.6 },
 ];
 
+type Product = typeof products[0] & { quantity?: number };
+
 export default function FeaturedProducts() {
-  const [cartItems, setCartItems] = useState<typeof products>([]);
+  const [cartItems, setCartItems] = useState<Product[]>([]);
   const [showCartModal, setShowCartModal] = useState(false);
 
-  const handleAddToCart = (product: typeof products[0]) => {
+  const handleAddToCart = (product: Product) => {
     const existingItem = cartItems.find(item => item.id === product.id);
     if (existingItem) {
       // If product already in cart, update quantity (we'll handle this with a new field)
