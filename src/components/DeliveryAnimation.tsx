@@ -4,9 +4,15 @@ import { Building, Home } from "lucide-react";
 
 export default function DeliveryAnimation() {
   return (
-    <div className="w-full h-64 bg-gradient-to-b from-sky-50 via-blue-50 to-white rounded-xl overflow-hidden relative">
+    <div
+      className="w-full h-64 rounded-xl overflow-hidden relative"
+      style={{ background: "linear-gradient(180deg, #FBE8DF 0%, #FAF6F0 60%, #FFFFFF 100%)" }}
+    >
       {/* Top decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-100/20 to-transparent pointer-events-none"></div>
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "linear-gradient(180deg, rgba(217,119,87,0.08) 0%, transparent 60%)" }}
+      ></div>
 
       {/* Road base */}
       <div className="absolute bottom-24 w-full h-2 bg-gradient-to-r from-gray-300 via-gray-400 to-gray-300 shadow-md"></div>
@@ -29,10 +35,13 @@ export default function DeliveryAnimation() {
 
       {/* Restaurant */}
       <div className="absolute left-8 bottom-32 z-10">
-        <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[#EC6530] to-orange-600 flex items-center justify-center shadow-lg">
+        <div
+          className="w-14 h-14 rounded-lg flex items-center justify-center shadow-lg"
+          style={{ background: "#D97757" }}
+        >
           <Building size={28} className="text-white" />
         </div>
-        <p className="text-xs font-semibold text-gray-700 mt-2 text-center">Resto</p>
+        <p className="text-xs font-semibold mt-2 text-center" style={{ color: "#4A3527" }}>Resto</p>
       </div>
 
       {/* Animated Delivery Bike - SMOOTH */}
@@ -64,7 +73,7 @@ export default function DeliveryAnimation() {
           </g>
 
           {/* Seat */}
-          <ellipse cx="32" cy="16" rx="8" ry="2.5" fill="#EC6530"/>
+          <ellipse cx="32" cy="16" rx="8" ry="2.5" fill="#D97757"/>
 
           {/* Handlebar */}
           <g strokeLinecap="round">
@@ -73,7 +82,7 @@ export default function DeliveryAnimation() {
           </g>
 
           {/* Delivery Box */}
-          <rect x="22" y="11" width="14" height="10" fill="#EC6530" rx="1" opacity="0.95" />
+          <rect x="22" y="11" width="14" height="10" fill="#D97757" rx="1" opacity="0.95" />
           <rect x="22" y="11" width="14" height="10" fill="none" stroke="#1f2937" strokeWidth="1.5" rx="1"/>
           <line x1="29" y1="11" x2="29" y2="21" stroke="#1f2937" strokeWidth="1" opacity="0.3"/>
 
@@ -85,17 +94,23 @@ export default function DeliveryAnimation() {
 
       {/* Home destination */}
       <div className="absolute right-8 bottom-32 z-10">
-        <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-green-100 to-green-200 border-2 border-green-300 flex items-center justify-center shadow-lg">
-          <Home size={28} className="text-green-700" />
+        <div
+          className="w-14 h-14 rounded-lg flex items-center justify-center shadow-lg"
+          style={{ background: "#EAF4EC", border: "2px solid #BFE0C8" }}
+        >
+          <Home size={28} color="#4E9A6A" />
         </div>
-        <p className="text-xs font-semibold text-gray-700 mt-2 text-center">Rumah</p>
+        <p className="text-xs font-semibold mt-2 text-center" style={{ color: "#4A3527" }}>Rumah</p>
       </div>
 
       {/* Status badge */}
       <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-lg border border-gray-100">
-          <div className="w-2 h-2 bg-[#EC6530] rounded-full animate-pulse"></div>
-          <span className="text-sm font-semibold text-gray-900">Dalam Perjalanan</span>
+        <div
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full shadow-lg"
+          style={{ background: "#FFFFFF", border: "1px solid #EEEDE7" }}
+        >
+          <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#D97757" }}></div>
+          <span className="text-sm font-semibold" style={{ color: "#1C1C1A" }}>Dalam Perjalanan</span>
         </div>
       </div>
 
