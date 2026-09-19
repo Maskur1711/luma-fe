@@ -3,6 +3,7 @@
 import { Star } from "lucide-react";
 import { useState } from "react";
 import CartPreview from "./CartPreview";
+import CartModal from "./CartModal";
 
 const products = [
   { id: 1, name: "Kue Coklat Lezat", price: 25000, rating: 4.8 },
@@ -12,19 +13,47 @@ const products = [
 ];
 
 export default function FeaturedProducts() {
-  const [cartItems, setCartItems] = useState(0);
-  const [cartTotal, setCartTotal] = useState(0);
-  const [lastProduct, setLastProduct] = useState("");
-  const [showCartPreview, setShowCartPreview] = useState(false);
+  const [cartItems, setCartItems] = useState<typeof products>([]);
+  const [showCartModal, setShowCartModal] = useState(false);
 
   const handleAddToCart = (product: typeof products[0]) => {
-    setCartItems(prev => prev + 1);
-    setCartTotal(prev => prev + product.price);
-    setLastProduct(product.name);
-    setShowCartPreview(true);
+    const existingItem = cartItems.find(item => item.id === product.id);
+    if (existingItem) {
+      // If product already in cart, update quantity (we'll handle this with a new field)
+      setCartItems(cartItems.map(item =>
+        item.id === product.id
+          ? { ...item, quantity: (item.quantity || 1) + 1 }
+          : item
+      ));
+    } else {
+      // Add new product to cart
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
+  };
 
-    // Hide preview after 3 seconds
-    setTimeout(() => setShowCartPreview(false), 3000);
+  const getTotalPrice = () => {
+    return cartItems.reduce((total, item) => total + (item.price * (item.quantity || 1)), 0);
+  };
+
+  const handleUpdateQuantity = (productId: number, newQuantity: number) => {
+    if (newQuantity === 0) {
+      handleRemoveItem(productId);
+    } else {
+      setCartItems(
+        cartItems.map(item =>
+          item.id === productId ? { ...item, quantity: newQuantity } : item
+        )
+      );
+    }
+  };
+
+  const handleRemoveItem = (productId: number) => {
+    setCartItems(cartItems.filter(item => item.id !== productId));
+  };
+
+  const getLastProduct = () => {
+    if (cartItems.length === 0) return "";
+    return cartItems[cartItems.length - 1].name;
   };
 
   return (
@@ -72,10 +101,18 @@ export default function FeaturedProducts() {
     </section>
 
       <CartPreview
-        isVisible={showCartPreview}
-        itemCount={cartItems}
-        totalPrice={cartTotal}
-        lastProduct={lastProduct}
+        itemCount={cartItems.length}
+        totalPrice={getTotalPrice()}
+        lastProduct={getLastProduct()}
+        onClick={() => setShowCartModal(true)}
+      />
+
+      <CartModal
+        isOpen={showCartModal}
+        cartItems={cartItems}
+        onClose={() => setShowCartModal(false)}
+        onUpdateQuantity={handleUpdateQuantity}
+        onRemoveItem={handleRemoveItem}
       />
     </>
   );
