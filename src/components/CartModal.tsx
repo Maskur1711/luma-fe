@@ -40,10 +40,7 @@ export default function CartModal({
   const handleCheckout = async () => {
     setIsLoading(true);
     try {
-      const url = `/payment?total=${totalPrice}&items=${cartItems.length}`;
-      console.log("Checkout URL:", url, "totalPrice:", totalPrice, "cartItems.length:", cartItems.length);
-      console.log("cartItems data:", cartItems);
-      router.push(url);
+      router.push(`/payment?total=${totalPrice}&items=${cartItems.length}`);
     } catch (error) {
       console.error("Checkout error:", error);
       setIsLoading(false);

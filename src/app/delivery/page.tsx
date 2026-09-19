@@ -3,10 +3,10 @@ import Link from "next/link";
 import DeliveryAnimation from "@/components/DeliveryAnimation";
 
 interface PageProps {
-  searchParams: {
+  searchParams: Promise<{
     total?: string;
     items?: string;
-  };
+  }>;
 }
 
 const statusSteps = [
@@ -16,9 +16,10 @@ const statusSteps = [
   { status: "Sudah Tiba", Icon: Home, color: "bg-purple-100", textColor: "text-purple-700", iconColor: "text-purple-700" },
 ];
 
-export default function DeliveryPage({ searchParams }: PageProps) {
-  const totalPrice = parseInt(searchParams.total || "0");
-  const itemCount = searchParams.items || "0";
+export default async function DeliveryPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const totalPrice = parseInt(params.total || "0");
+  const itemCount = params.items || "0";
   const currentStep = 2; // Dalam Perjalanan
 
   return (
