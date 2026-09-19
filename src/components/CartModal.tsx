@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { X, Minus, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -27,6 +28,7 @@ export default function CartModal({
   onRemoveItem,
 }: CartModalProps) {
   const router = useRouter();
+  const [isLoading, setIsLoading] = React.useState(false);
 
   if (!isOpen) return null;
 
@@ -35,8 +37,14 @@ export default function CartModal({
     0
   );
 
-  const handleCheckout = () => {
-    router.push(`/payment?total=${totalPrice}&items=${cartItems.length}`);
+  const handleCheckout = async () => {
+    setIsLoading(true);
+    try {
+      router.push(`/payment?total=${totalPrice}&items=${cartItems.length}`);
+    } catch (error) {
+      console.error("Checkout error:", error);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -138,9 +146,10 @@ export default function CartModal({
           </button>
           <button
             onClick={handleCheckout}
-            className="flex-1 bg-[#EC6530] text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition"
+            disabled={isLoading}
+            className="flex-1 bg-[#EC6530] text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition disabled:opacity-75 disabled:cursor-not-allowed"
           >
-            Checkout
+            {isLoading ? "Processing..." : "Checkout"}
           </button>
         </div>
       </div>
