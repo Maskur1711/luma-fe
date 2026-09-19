@@ -83,7 +83,7 @@ export default function CartModal({
                     >
                       <Minus size={16} className="text-gray-700" />
                     </button>
-                    <span className="text-sm font-bold w-6 text-center text-gray-900">
+                    <span className="text-sm font-bold w-6 text-center text-black">
                       {item.quantity || 1}
                     </span>
                     <button
