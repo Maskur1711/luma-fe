@@ -40,7 +40,14 @@ export default function CartModal({
   const handleCheckout = async () => {
     setIsLoading(true);
     try {
-      router.push(`/payment?total=${totalPrice}&items=${cartItems.length}`);
+      const cartData = cartItems.map((item) => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity || 1,
+      }));
+      const cartParam = encodeURIComponent(JSON.stringify(cartData));
+      router.push(`/payment?total=${totalPrice}&items=${cartItems.length}&cart=${cartParam}`);
     } catch (error) {
       console.error("Checkout error:", error);
       setIsLoading(false);

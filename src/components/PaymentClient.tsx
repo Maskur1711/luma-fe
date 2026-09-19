@@ -3,20 +3,57 @@
 import dynamicImport from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ShieldCheck, Zap } from "lucide-react";
+import type { InvoiceItem } from "@/app/payment/page";
 
 const QRCodeComponent = dynamicImport(
   () => import("qrcode.react").then(mod => ({ default: mod.QRCodeCanvas })),
   { ssr: false }
 );
 
+const WHATSAPP_NUMBER = "6289513990786";
+
+function buildInvoiceMessage(cartItems: InvoiceItem[], total: number, orderId: string) {
+  const dateLabel = new Date().toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  const lines = [
+    "*INVOICE LUMA*",
+    `No. Order: ${orderId}`,
+    `Tanggal: ${dateLabel}`,
+    "",
+    ...cartItems.map(
+      (item) =>
+        `${item.name} x${item.quantity} - Rp ${(item.price * item.quantity).toLocaleString()}`
+    ),
+    "",
+    `Total: Rp ${total.toLocaleString()}`,
+    "",
+    "Mohon konfirmasi pembayaran ini. Terima kasih!",
+  ];
+
+  return lines.join("\n");
+}
+
 interface PaymentClientProps {
   totalPrice: string;
   itemCount: string;
+  cartItems: InvoiceItem[];
 }
 
-export default function PaymentClient({ totalPrice, itemCount }: PaymentClientProps) {
+export default function PaymentClient({ totalPrice, itemCount, cartItems }: PaymentClientProps) {
   const router = useRouter();
   const qrValue = `luma-payment-${Date.now()}`;
+
+  const handlePaymentComplete = () => {
+    const orderId = `LUMA-${Date.now().toString().slice(-6)}`;
+    const message = buildInvoiceMessage(cartItems, parseInt(totalPrice), orderId);
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(waUrl, "_blank");
+    router.push(`/delivery?total=${totalPrice}&items=${itemCount}`);
+  };
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "#FAFAF8" }}>
@@ -113,7 +150,7 @@ export default function PaymentClient({ totalPrice, itemCount }: PaymentClientPr
           {/* Action Buttons */}
           <div className="space-y-3">
             <button
-              onClick={() => router.push(`/delivery?total=${totalPrice}&items=${itemCount}`)}
+              onClick={handlePaymentComplete}
               className="w-full text-white py-3 rounded-xl font-semibold transition"
               style={{ background: "#D97757" }}
             >
