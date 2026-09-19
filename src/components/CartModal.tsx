@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { X, Minus, Plus, Trash2 } from "lucide-react";
+import { X, Minus, Plus, Trash2, UtensilsCrossed } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface CartItem {
@@ -40,7 +40,10 @@ export default function CartModal({
   const handleCheckout = async () => {
     setIsLoading(true);
     try {
-      router.push(`/payment?total=${totalPrice}&items=${cartItems.length}`);
+      const url = `/payment?total=${totalPrice}&items=${cartItems.length}`;
+      console.log("Checkout URL:", url, "totalPrice:", totalPrice, "cartItems.length:", cartItems.length);
+      console.log("cartItems data:", cartItems);
+      router.push(url);
     } catch (error) {
       console.error("Checkout error:", error);
       setIsLoading(false);
@@ -74,8 +77,8 @@ export default function CartModal({
               className="bg-gray-50 border border-gray-200 rounded-lg p-3"
             >
               <div className="flex gap-3">
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <span className="text-2xl md:text-3xl">🍽️</span>
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <UtensilsCrossed size={28} className="text-[#EC6530]" />
                 </div>
 
                 <div className="flex-1 min-w-0">
