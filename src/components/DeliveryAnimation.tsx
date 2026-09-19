@@ -2,230 +2,112 @@
 
 export default function DeliveryAnimation() {
   return (
-    <div className="w-full h-64 bg-gradient-to-b from-sky-100 via-sky-50 to-white rounded-xl overflow-hidden flex items-center justify-center relative shadow-inner">
-      {/* Animated gradient sky */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-200/30 via-cyan-100/20 to-transparent"></div>
+    <div className="w-full h-56 bg-gradient-to-b from-blue-50 to-white rounded-xl overflow-hidden relative shadow-sm">
+      {/* Sky gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-sky-100/50 to-transparent pointer-events-none"></div>
 
-      {/* Clouds animation */}
-      <div className="absolute top-8 left-0 w-20 h-8 bg-white rounded-full opacity-60" style={{
-        animation: "cloudFloat 8s ease-in-out infinite",
-        boxShadow: "0 4px 8px rgba(0,0,0,0.1)"
-      }}></div>
-      <div className="absolute top-12 right-0 w-24 h-10 bg-white rounded-full opacity-50" style={{
-        animation: "cloudFloat 10s ease-in-out infinite 2s",
-        boxShadow: "0 4px 8px rgba(0,0,0,0.1)"
-      }}></div>
+      {/* Road */}
+      <div className="absolute bottom-20 w-full h-1.5 bg-gray-400"></div>
 
-      {/* Road base */}
-      <div className="absolute bottom-20 w-full h-2 bg-gradient-to-r from-gray-300 via-gray-400 to-gray-300 shadow-md"></div>
-
-      {/* Road markings animation */}
-      <div className="absolute bottom-20 w-full h-2 flex overflow-hidden opacity-70">
-        {[...Array(30)].map((_, i) => (
+      {/* Road dashes animation */}
+      <div className="absolute bottom-20 w-full h-1.5 flex overflow-hidden">
+        {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="h-full flex-shrink-0"
+            className="h-full w-12 border-l-2 border-white flex-shrink-0"
             style={{
-              width: "8%",
-              backgroundImage: "linear-gradient(90deg, transparent 40%, white 40%, white 60%, transparent 60%)",
-              animation: "roadMove 2s linear infinite",
-              animationDelay: `${i * -0.067}s`
+              animation: "roadDash 3s linear infinite",
+              animationDelay: `${i * -0.15}s`
             }}
           ></div>
         ))}
       </div>
 
-      {/* Restaurant building */}
-      <div className="absolute left-6 bottom-24 z-10">
-        <div className="w-14 h-14 bg-gradient-to-br from-[#EC6530] to-orange-600 rounded-lg flex items-center justify-center text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
-            <path d="M4 10h24v16H4z"/>
-            <path d="M8 14h4v8H8zm8 0h4v8h-4zm8 0h4v8h-4z"/>
-            <path d="M16 4l10 6H6z"/>
-          </svg>
+      {/* Restaurant marker */}
+      <div className="absolute left-8 bottom-24 z-10">
+        <div className="w-12 h-12 rounded-full bg-[#EC6530] flex items-center justify-center text-white shadow-md font-bold">
+          🏪
         </div>
-        <p className="text-xs text-gray-700 font-semibold mt-2 text-center">Resto</p>
       </div>
 
-      {/* Animated Delivery Motorcycle */}
+      {/* Animated delivery bike - Simple and clean */}
       <div
-        className="absolute z-20"
+        className="absolute bottom-20 z-20"
         style={{
-          bottom: "20px",
-          animation: "deliverySmoothMove 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite",
-          left: "10%",
-          filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.15))"
+          animation: "bikeSmoothMove 4.5s cubic-bezier(0.42, 0, 0.58, 1) infinite",
+          left: "10%"
         }}
       >
-        <svg width="70" height="50" viewBox="0 0 70 50" className="transition-transform duration-300">
-          {/* Back Wheel with rim effect */}
-          <g>
-            <circle cx="14" cy="35" r="10" fill="none" stroke="#1f2937" strokeWidth="3"/>
-            <circle cx="14" cy="35" r="7" fill="none" stroke="#4b5563" strokeWidth="1" opacity="0.6"/>
-            <circle cx="14" cy="35" r="4" fill="none" stroke="#d1d5db" strokeWidth="0.5"/>
-            {[...Array(8)].map((_, i) => (
-              <line
-                key={`rim${i}`}
-                x1="14"
-                y1="25"
-                x2={14 + Math.cos((i * Math.PI) / 4) * 5}
-                y2={35 + Math.sin((i * Math.PI) / 4) * 5}
-                stroke="#9ca3af"
-                strokeWidth="0.5"
-              />
-            ))}
-          </g>
+        <svg width="60" height="45" viewBox="0 0 60 45" className="drop-shadow-lg">
+          {/* Back wheel */}
+          <circle cx="12" cy="32" r="9" fill="none" stroke="#2d3748" strokeWidth="2.5"/>
+          <circle cx="12" cy="32" r="5.5" fill="none" stroke="#a0aec0" strokeWidth="1"/>
 
-          {/* Front Wheel with rim effect */}
-          <g>
-            <circle cx="56" cy="35" r="10" fill="none" stroke="#1f2937" strokeWidth="3"/>
-            <circle cx="56" cy="35" r="7" fill="none" stroke="#4b5563" strokeWidth="1" opacity="0.6"/>
-            <circle cx="56" cy="35" r="4" fill="none" stroke="#d1d5db" strokeWidth="0.5"/>
-            {[...Array(8)].map((_, i) => (
-              <line
-                key={`frontrim${i}`}
-                x1="56"
-                y1="25"
-                x2={56 + Math.cos((i * Math.PI) / 4) * 5}
-                y2={35 + Math.sin((i * Math.PI) / 4) * 5}
-                stroke="#9ca3af"
-                strokeWidth="0.5"
-              />
-            ))}
-          </g>
+          {/* Front wheel */}
+          <circle cx="48" cy="32" r="9" fill="none" stroke="#2d3748" strokeWidth="2.5"/>
+          <circle cx="48" cy="32" r="5.5" fill="none" stroke="#a0aec0" strokeWidth="1"/>
 
-          {/* Frame - Main body */}
-          <g strokeLinecap="round" strokeLinejoin="round">
-            <line x1="14" y1="35" x2="35" y2="18" stroke="#374151" strokeWidth="2.5"/>
-            <line x1="35" y1="18" x2="56" y2="35" stroke="#374151" strokeWidth="2.5"/>
-            <line x1="14" y1="35" x2="56" y2="35" stroke="#374151" strokeWidth="2.5"/>
-            <line x1="35" y1="18" x2="28" y2="25" stroke="#374151" strokeWidth="2"/>
-          </g>
+          {/* Frame lines */}
+          <line x1="12" y1="32" x2="32" y2="16" stroke="#2d3748" strokeWidth="2" strokeLinecap="round"/>
+          <line x1="32" y1="16" x2="48" y2="32" stroke="#2d3748" strokeWidth="2" strokeLinecap="round"/>
+          <line x1="12" y1="32" x2="48" y2="32" stroke="#2d3748" strokeWidth="2" strokeLinecap="round"/>
 
-          {/* Seat with gradient */}
-          <ellipse cx="32" cy="16" rx="8" ry="3" fill="#EC6530" opacity="0.9" filter="url(#seatShadow)"/>
-          <ellipse cx="32" cy="15" rx="8" ry="2.5" fill="#ff7a3d" opacity="0.6"/>
+          {/* Seat */}
+          <ellipse cx="30" cy="14" rx="7" ry="2.5" fill="#EC6530"/>
 
-          {/* Handlebars */}
-          <g strokeLinecap="round">
-            <line x1="56" y1="35" x2="58" y2="28" stroke="#374151" strokeWidth="2.5"/>
-            <path d="M 55 27 Q 58 25 61 27" fill="none" stroke="#374151" strokeWidth="2"/>
-            <circle cx="55" cy="27" r="1.5" fill="#6b7280"/>
-            <circle cx="61" cy="27" r="1.5" fill="#6b7280"/>
-          </g>
+          {/* Handlebar */}
+          <line x1="48" y1="32" x2="50" y2="26" stroke="#2d3748" strokeWidth="2" strokeLinecap="round"/>
+          <path d="M 46 26 Q 50 24 54 26" fill="none" stroke="#2d3748" strokeWidth="2" strokeLinecap="round"/>
 
-          {/* Delivery Box - Main */}
-          <g filter="url(#boxShadow)">
-            <rect x="22" y="10" width="16" height="12" fill="#EC6530" rx="2" opacity="0.95"/>
-            <rect x="22" y="10" width="16" height="12" fill="none" stroke="#374151" strokeWidth="1.5" rx="2"/>
+          {/* Delivery Box */}
+          <rect x="21" y="9" width="13" height="9" fill="#EC6530" rx="1.5" opacity="0.9"/>
+          <rect x="21" y="9" width="13" height="9" fill="none" stroke="#2d3748" strokeWidth="1.5" rx="1.5"/>
+          <line x1="27.5" y1="9" x2="27.5" y2="18" stroke="#2d3748" strokeWidth="1" opacity="0.4"/>
 
-            {/* Box door */}
-            <line x1="30" y1="10" x2="30" y2="22" stroke="#374151" strokeWidth="1" opacity="0.5"/>
-
-            {/* Box handle */}
-            <rect x="27" y="8" width="6" height="1.5" fill="#d97706" rx="0.5"/>
-
-            {/* Luma branding on box */}
-            <text x="30" y="19" fontSize="2" fill="white" fontWeight="bold" textAnchor="middle">L</text>
-          </g>
-
-          {/* Driver helmet */}
-          <circle cx="50" cy="22" r="2.5" fill="#374151"/>
-          <path d="M 48 24 L 48 27 M 50 25 L 52 27" stroke="#374151" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-
-          {/* Headlight effect */}
-          <circle cx="58" cy="32" r="1.5" fill="#fbbf24" opacity="0.7" filter="url(#lightGlow)"/>
-
-          {/* Defs for filters */}
-          <defs>
-            <filter id="boxShadow">
-              <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.2"/>
-            </filter>
-            <filter id="seatShadow">
-              <feDropShadow dx="0" dy="1" stdDeviation="1" floodOpacity="0.15"/>
-            </filter>
-            <filter id="lightGlow">
-              <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
-              <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-          </defs>
+          {/* Person head */}
+          <circle cx="44" cy="20" r="2" fill="#2d3748"/>
+          {/* Person body */}
+          <line x1="44" y1="22" x2="44" y2="26" stroke="#2d3748" strokeWidth="1.5" strokeLinecap="round"/>
         </svg>
       </div>
 
-      {/* Destination home */}
-      <div className="absolute right-6 bottom-24 z-10">
-        <div className="w-14 h-14 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center border-2 border-green-300 shadow-lg transform hover:scale-105 transition-transform duration-300">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="#16a34a">
-            <path d="M16 4l12 10h-2v12H6V14H4z"/>
-            <path d="M12 20h8v6h-8z" fill="#fef3c7"/>
-            <circle cx="16" cy="23" r="1.5" fill="#374151"/>
-          </svg>
+      {/* Home marker */}
+      <div className="absolute right-8 bottom-24 z-10">
+        <div className="w-12 h-12 rounded-full bg-green-100 border-2 border-green-400 flex items-center justify-center text-white shadow-md font-bold text-2xl">
+          🏠
         </div>
-        <p className="text-xs text-gray-700 font-semibold mt-2 text-center">Rumah</p>
       </div>
 
-      {/* Status indicator with animation */}
-      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-white/20">
-          <div className="w-2 h-2 bg-[#EC6530] rounded-full animate-pulse"></div>
-          <p className="text-sm font-semibold text-gray-900">Dalam Perjalanan</p>
-        </div>
+      {/* Status label */}
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
+        <span className="inline-block bg-white/95 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm font-semibold text-[#EC6530] shadow-md border border-white/30">
+          Sedang Dikirim
+        </span>
       </div>
 
       <style>{`
-        @keyframes deliverySmoothMove {
+        @keyframes bikeSmoothMove {
           0% {
             left: 5%;
             transform: scaleX(1);
           }
-          25% {
-            transform: translateY(-8px) scaleX(1);
-          }
           50% {
             left: 47.5%;
-            transform: translateY(0) scaleX(1);
-          }
-          75% {
-            transform: translateY(-8px) scaleX(-1);
+            transform: scaleX(1);
           }
           100% {
             left: 85%;
-            transform: translateY(0) scaleX(-1);
+            transform: scaleX(-1);
           }
         }
 
-        @keyframes roadMove {
+        @keyframes roadDash {
           0% {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-100%);
+            transform: translateX(-48px);
           }
-        }
-
-        @keyframes cloudFloat {
-          0%, 100% {
-            transform: translateX(0);
-          }
-          50% {
-            transform: translateX(20px);
-          }
-        }
-
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.5;
-          }
-        }
-
-        .animate-pulse {
-          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
       `}</style>
     </div>
