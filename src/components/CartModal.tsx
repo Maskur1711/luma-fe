@@ -1,6 +1,7 @@
 "use client";
 
 import { X, Minus, Plus, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface CartItem {
   id: number;
@@ -25,12 +26,18 @@ export default function CartModal({
   onUpdateQuantity,
   onRemoveItem,
 }: CartModalProps) {
+  const router = useRouter();
+
   if (!isOpen) return null;
 
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * (item.quantity || 1),
     0
   );
+
+  const handleCheckout = () => {
+    router.push(`/payment?total=${totalPrice}&items=${cartItems.length}`);
+  };
 
   return (
     <>
@@ -130,7 +137,7 @@ export default function CartModal({
             Lanjut Belanja
           </button>
           <button
-            onClick={onClose}
+            onClick={handleCheckout}
             className="flex-1 bg-[#EC6530] text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition"
           >
             Checkout
