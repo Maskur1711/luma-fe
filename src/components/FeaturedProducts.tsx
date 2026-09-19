@@ -2,7 +2,7 @@
 
 import { Star } from "lucide-react";
 import { useState } from "react";
-import AddToCartModal from "./AddToCartModal";
+import CartPreview from "./CartPreview";
 
 const products = [
   { id: 1, name: "Kue Coklat Lezat", price: 25000, rating: 4.8 },
@@ -12,12 +12,19 @@ const products = [
 ];
 
 export default function FeaturedProducts() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
+  const [cartItems, setCartItems] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
+  const [lastProduct, setLastProduct] = useState("");
+  const [showCartPreview, setShowCartPreview] = useState(false);
 
   const handleAddToCart = (product: typeof products[0]) => {
-    setSelectedProduct(product);
-    setIsModalOpen(true);
+    setCartItems(prev => prev + 1);
+    setCartTotal(prev => prev + product.price);
+    setLastProduct(product.name);
+    setShowCartPreview(true);
+
+    // Hide preview after 3 seconds
+    setTimeout(() => setShowCartPreview(false), 3000);
   };
 
   return (
@@ -64,10 +71,11 @@ export default function FeaturedProducts() {
       </div>
     </section>
 
-      <AddToCartModal
-        isOpen={isModalOpen}
-        product={selectedProduct}
-        onClose={() => setIsModalOpen(false)}
+      <CartPreview
+        isVisible={showCartPreview}
+        itemCount={cartItems}
+        totalPrice={cartTotal}
+        lastProduct={lastProduct}
       />
     </>
   );
