@@ -1,15 +1,25 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import QRCode from "qrcode.react";
-import Link from "next/link";
+import dynamicImport from "next/dynamic";
+import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
-export default function PaymentPage() {
+const QRCodeComponent = dynamicImport(
+  () => import("qrcode.react").then(mod => ({ default: mod.QRCodeCanvas })),
+  { ssr: false }
+);
+
+interface PageProps {
+  searchParams: {
+    total?: string;
+    items?: string;
+  };
+}
+
+export default function PaymentPage({ searchParams }: PageProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const totalPrice = searchParams.get("total") || "0";
-  const itemCount = searchParams.get("items") || "0";
+  const totalPrice = searchParams.total || "0";
+  const itemCount = searchParams.items || "0";
 
   const qrValue = `luma-payment-${Date.now()}`;
 
@@ -42,7 +52,7 @@ export default function PaymentPage() {
 
           {/* QR Code */}
           <div className="bg-gray-50 border-2 border-gray-200 rounded-2xl p-8 mb-8 flex items-center justify-center">
-            <QRCode
+            <QRCodeComponent
               value={qrValue}
               size={280}
               level="H"
