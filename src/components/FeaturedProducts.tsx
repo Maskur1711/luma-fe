@@ -1,4 +1,8 @@
+"use client";
+
 import { Star } from "lucide-react";
+import { useState } from "react";
+import AddToCartModal from "./AddToCartModal";
 
 const products = [
   { id: 1, name: "Kue Coklat Lezat", price: 25000, rating: 4.8 },
@@ -8,7 +12,16 @@ const products = [
 ];
 
 export default function FeaturedProducts() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
+
+  const handleAddToCart = (product: typeof products[0]) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
   return (
+    <>
     <section className="py-16 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-gray-900 text-center mb-12">
@@ -38,7 +51,10 @@ export default function FeaturedProducts() {
                 <span className="text-2xl font-bold text-[#EC6530]">
                   Rp {product.price.toLocaleString()}
                 </span>
-                <button className="bg-[#EC6530] text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-600 transition">
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className="bg-[#EC6530] text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-600 transition"
+                >
                   Add
                 </button>
               </div>
@@ -47,5 +63,12 @@ export default function FeaturedProducts() {
         </div>
       </div>
     </section>
+
+      <AddToCartModal
+        isOpen={isModalOpen}
+        product={selectedProduct}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 }

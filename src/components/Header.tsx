@@ -1,16 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { ShoppingCart, Plus } from "lucide-react";
-import { useState } from "react";
-import SearchModal from "./SearchModal";
+import { ShoppingCart } from "lucide-react";
 
 export default function Header() {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-
   return (
-    <>
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+    <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="text-2xl font-bold tracking-tight text-gray-900">
           Luma
@@ -31,21 +24,10 @@ export default function Header() {
           </Link>
         </nav>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setIsSearchOpen(true)}
-            className="p-2 text-gray-700 hover:text-[#EC6530] transition"
-          >
-            <Plus size={24} />
-          </button>
-          <button className="p-2 text-gray-700 hover:text-[#EC6530] transition">
-            <ShoppingCart size={24} />
-          </button>
-        </div>
+        <button className="p-2 text-gray-700 hover:text-[#EC6530] transition">
+          <ShoppingCart size={24} />
+        </button>
       </div>
     </header>
-
-      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-    </>
   );
 }
