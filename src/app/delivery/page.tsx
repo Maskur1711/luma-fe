@@ -11,9 +11,9 @@ interface PageProps {
 
 const statusSteps = [
   { status: "Pesanan Dikonfirmasi", icon: "✓", color: "bg-green-100", textColor: "text-green-700" },
-  { status: "Sedang Diproses", icon: "⚙️", color: "bg-blue-100", textColor: "text-blue-700" },
-  { status: "Dalam Perjalanan", icon: "🚚", color: "bg-yellow-100", textColor: "text-yellow-700" },
-  { status: "Sudah Tiba", icon: "🏠", color: "bg-purple-100", textColor: "text-purple-700" },
+  { status: "Sedang Diproses", icon: "⚙", color: "bg-blue-100", textColor: "text-blue-700" },
+  { status: "Dalam Perjalanan", icon: "🚛", color: "bg-yellow-100", textColor: "text-yellow-700" },
+  { status: "Sudah Tiba", icon: "✓", color: "bg-purple-100", textColor: "text-purple-700" },
 ];
 
 export default function DeliveryPage({ searchParams }: PageProps) {
