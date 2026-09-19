@@ -26,9 +26,9 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-16 px-4 bg-white">
+    <section className="py-16 px-4 bg-gray-50">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-[#EC6530] text-center mb-12">
+        <h2 className="text-4xl font-bold text-gray-900 text-center mb-12">
           Apa Kata Pelanggan Kami
         </h2>
 
@@ -36,7 +36,7 @@ export default function Testimonials() {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="bg-gradient-to-br from-[#FFE3E3] to-[#FFAE6E] rounded-lg p-6 shadow-md hover:shadow-xl transition"
+              className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 bg-[#EC6530] rounded-full flex items-center justify-center text-white font-bold">{testimonial.initials}</div>

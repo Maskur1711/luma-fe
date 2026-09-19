@@ -1,17 +1,17 @@
 const categories = [
-  { name: "Snacks", color: "bg-[#FFE3E3]" },
-  { name: "Bakery", color: "bg-[#FFAE6E]" },
-  { name: "Beverages", color: "bg-[#8FDDDF]" },
-  { name: "Desserts", color: "bg-[#EC6530]" },
-  { name: "Fast Food", color: "bg-[#FFE3E3]" },
-  { name: "Healthy", color: "bg-[#8FDDDF]" },
+  { name: "Snacks" },
+  { name: "Bakery" },
+  { name: "Beverages" },
+  { name: "Desserts" },
+  { name: "Fast Food" },
+  { name: "Healthy" },
 ];
 
 export default function Categories() {
   return (
-    <section className="py-16 px-4 bg-gray-50">
+    <section className="py-16 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-[#EC6530] text-center mb-12">
+        <h2 className="text-4xl font-bold text-gray-900 text-center mb-12">
           Jelajahi Kategori
         </h2>
 
@@ -19,7 +19,7 @@ export default function Categories() {
           {categories.map((category, idx) => (
             <div
               key={idx}
-              className={`${category.color} rounded-lg p-6 text-center hover:shadow-lg transition transform hover:scale-110 cursor-pointer`}
+              className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center hover:shadow-md transition hover:border-[#EC6530] cursor-pointer"
             >
               <h3 className="font-semibold text-gray-800">{category.name}</h3>
             </div>

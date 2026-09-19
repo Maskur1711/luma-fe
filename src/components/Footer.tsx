@@ -2,7 +2,7 @@ import { MessageCircle, Heart, Share2, Mail, MapPin, Phone } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="bg-[#EC6530] text-white py-12 px-4">
+    <footer className="bg-gray-900 text-white py-12 px-4">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
         <div>
           <h3 className="text-xl font-bold mb-4">Luma</h3>
