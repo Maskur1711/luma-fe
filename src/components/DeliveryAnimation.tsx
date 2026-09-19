@@ -1,113 +1,148 @@
 "use client";
 
+import { Building, Home } from "lucide-react";
+
 export default function DeliveryAnimation() {
   return (
-    <div className="w-full h-56 bg-gradient-to-b from-blue-50 to-white rounded-xl overflow-hidden relative shadow-sm">
-      {/* Sky gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-sky-100/50 to-transparent pointer-events-none"></div>
+    <div className="w-full h-64 bg-gradient-to-b from-sky-50 via-blue-50 to-white rounded-xl overflow-hidden relative">
+      {/* Top decoration */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-100/20 to-transparent pointer-events-none"></div>
 
-      {/* Road */}
-      <div className="absolute bottom-20 w-full h-1.5 bg-gray-400"></div>
+      {/* Road base */}
+      <div className="absolute bottom-24 w-full h-2 bg-gradient-to-r from-gray-300 via-gray-400 to-gray-300 shadow-md"></div>
 
-      {/* Road dashes animation */}
-      <div className="absolute bottom-20 w-full h-1.5 flex overflow-hidden">
-        {[...Array(20)].map((_, i) => (
+      {/* Road dashes - smooth animation */}
+      <div className="absolute bottom-24 w-full h-2 flex overflow-hidden opacity-60">
+        {[...Array(30)].map((_, i) => (
           <div
             key={i}
-            className="h-full w-12 border-l-2 border-white flex-shrink-0"
+            className="flex-shrink-0"
             style={{
-              animation: "roadDash 3s linear infinite",
-              animationDelay: `${i * -0.15}s`
+              width: "6%",
+              backgroundImage: "linear-gradient(90deg, transparent 35%, white 35%, white 65%, transparent 65%)",
+              animation: "roadMove 2s linear infinite",
+              animationDelay: `${i * -0.067}s`
             }}
           ></div>
         ))}
       </div>
 
-      {/* Restaurant marker */}
-      <div className="absolute left-8 bottom-24 z-10">
-        <div className="w-12 h-12 rounded-full bg-[#EC6530] flex items-center justify-center text-white shadow-md font-bold">
-          🏪
+      {/* Restaurant */}
+      <div className="absolute left-8 bottom-32 z-10">
+        <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[#EC6530] to-orange-600 flex items-center justify-center shadow-lg">
+          <Building size={28} className="text-white" />
         </div>
+        <p className="text-xs font-semibold text-gray-700 mt-2 text-center">Resto</p>
       </div>
 
-      {/* Animated delivery bike - Simple and clean */}
+      {/* Animated Delivery Bike - SMOOTH */}
       <div
-        className="absolute bottom-20 z-20"
+        className="absolute z-20"
         style={{
-          animation: "bikeSmoothMove 4.5s cubic-bezier(0.42, 0, 0.58, 1) infinite",
-          left: "10%"
+          bottom: "24px",
+          animation: "deliverySmooth 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite",
+          left: "8%",
+          filter: "drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15))"
         }}
       >
-        <svg width="60" height="45" viewBox="0 0 60 45" className="drop-shadow-lg">
+        {/* Simple, clean motorcycle SVG */}
+        <svg width="68" height="48" viewBox="0 0 68 48" className="w-full h-full">
           {/* Back wheel */}
-          <circle cx="12" cy="32" r="9" fill="none" stroke="#2d3748" strokeWidth="2.5"/>
-          <circle cx="12" cy="32" r="5.5" fill="none" stroke="#a0aec0" strokeWidth="1"/>
+          <circle cx="14" cy="36" r="10" fill="none" stroke="#1f2937" strokeWidth="3"/>
+          <circle cx="14" cy="36" r="6.5" fill="none" stroke="#9ca3af" strokeWidth="1" opacity="0.7"/>
 
           {/* Front wheel */}
-          <circle cx="48" cy="32" r="9" fill="none" stroke="#2d3748" strokeWidth="2.5"/>
-          <circle cx="48" cy="32" r="5.5" fill="none" stroke="#a0aec0" strokeWidth="1"/>
+          <circle cx="54" cy="36" r="10" fill="none" stroke="#1f2937" strokeWidth="3"/>
+          <circle cx="54" cy="36" r="6.5" fill="none" stroke="#9ca3af" strokeWidth="1" opacity="0.7"/>
 
-          {/* Frame lines */}
-          <line x1="12" y1="32" x2="32" y2="16" stroke="#2d3748" strokeWidth="2" strokeLinecap="round"/>
-          <line x1="32" y1="16" x2="48" y2="32" stroke="#2d3748" strokeWidth="2" strokeLinecap="round"/>
-          <line x1="12" y1="32" x2="48" y2="32" stroke="#2d3748" strokeWidth="2" strokeLinecap="round"/>
+          {/* Frame */}
+          <g strokeLinecap="round" strokeLinejoin="round">
+            <line x1="14" y1="36" x2="34" y2="18" stroke="#1f2937" strokeWidth="2.5"/>
+            <line x1="34" y1="18" x2="54" y2="36" stroke="#1f2937" strokeWidth="2.5"/>
+            <line x1="14" y1="36" x2="54" y2="36" stroke="#1f2937" strokeWidth="2.5"/>
+            <line x1="34" y1="18" x2="26" y2="26" stroke="#1f2937" strokeWidth="2"/>
+          </g>
 
           {/* Seat */}
-          <ellipse cx="30" cy="14" rx="7" ry="2.5" fill="#EC6530"/>
+          <ellipse cx="32" cy="16" rx="8" ry="2.5" fill="#EC6530"/>
 
           {/* Handlebar */}
-          <line x1="48" y1="32" x2="50" y2="26" stroke="#2d3748" strokeWidth="2" strokeLinecap="round"/>
-          <path d="M 46 26 Q 50 24 54 26" fill="none" stroke="#2d3748" strokeWidth="2" strokeLinecap="round"/>
+          <g strokeLinecap="round">
+            <line x1="54" y1="36" x2="56" y2="30" stroke="#1f2937" strokeWidth="2.5"/>
+            <path d="M 52 29 Q 56 27 60 29" fill="none" stroke="#1f2937" strokeWidth="2"/>
+          </g>
 
           {/* Delivery Box */}
-          <rect x="21" y="9" width="13" height="9" fill="#EC6530" rx="1.5" opacity="0.9"/>
-          <rect x="21" y="9" width="13" height="9" fill="none" stroke="#2d3748" strokeWidth="1.5" rx="1.5"/>
-          <line x1="27.5" y1="9" x2="27.5" y2="18" stroke="#2d3748" strokeWidth="1" opacity="0.4"/>
+          <rect x="22" y="11" width="14" height="10" fill="#EC6530" rx="1" opacity="0.95" />
+          <rect x="22" y="11" width="14" height="10" fill="none" stroke="#1f2937" strokeWidth="1.5" rx="1"/>
+          <line x1="29" y1="11" x2="29" y2="21" stroke="#1f2937" strokeWidth="1" opacity="0.3"/>
 
-          {/* Person head */}
-          <circle cx="44" cy="20" r="2" fill="#2d3748"/>
-          {/* Person body */}
-          <line x1="44" y1="22" x2="44" y2="26" stroke="#2d3748" strokeWidth="1.5" strokeLinecap="round"/>
+          {/* Rider */}
+          <circle cx="48" cy="22" r="2.5" fill="#1f2937"/>
+          <line x1="48" y1="25" x2="48" y2="29" stroke="#1f2937" strokeWidth="1.5" strokeLinecap="round"/>
         </svg>
       </div>
 
-      {/* Home marker */}
-      <div className="absolute right-8 bottom-24 z-10">
-        <div className="w-12 h-12 rounded-full bg-green-100 border-2 border-green-400 flex items-center justify-center text-white shadow-md font-bold text-2xl">
-          🏠
+      {/* Home destination */}
+      <div className="absolute right-8 bottom-32 z-10">
+        <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-green-100 to-green-200 border-2 border-green-300 flex items-center justify-center shadow-lg">
+          <Home size={28} className="text-green-700" />
+        </div>
+        <p className="text-xs font-semibold text-gray-700 mt-2 text-center">Rumah</p>
+      </div>
+
+      {/* Status badge */}
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-lg border border-gray-100">
+          <div className="w-2 h-2 bg-[#EC6530] rounded-full animate-pulse"></div>
+          <span className="text-sm font-semibold text-gray-900">Dalam Perjalanan</span>
         </div>
       </div>
 
-      {/* Status label */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
-        <span className="inline-block bg-white/95 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm font-semibold text-[#EC6530] shadow-md border border-white/30">
-          Sedang Dikirim
-        </span>
-      </div>
-
       <style>{`
-        @keyframes bikeSmoothMove {
+        @keyframes deliverySmooth {
           0% {
             left: 5%;
             transform: scaleX(1);
+            opacity: 1;
+          }
+          25% {
+            opacity: 1;
           }
           50% {
             left: 47.5%;
             transform: scaleX(1);
           }
+          75% {
+            opacity: 1;
+          }
           100% {
             left: 85%;
             transform: scaleX(-1);
+            opacity: 1;
           }
         }
 
-        @keyframes roadDash {
+        @keyframes roadMove {
           0% {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-48px);
+            transform: translateX(-100%);
           }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
+        }
+
+        .animate-pulse {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
       `}</style>
     </div>

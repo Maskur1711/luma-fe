@@ -1,4 +1,4 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CheckCircle, Cog, Truck, Home, Phone, Star } from "lucide-react";
 import Link from "next/link";
 import DeliveryAnimation from "@/components/DeliveryAnimation";
 
@@ -10,14 +10,14 @@ interface PageProps {
 }
 
 const statusSteps = [
-  { status: "Pesanan Dikonfirmasi", icon: "✓", color: "bg-green-100", textColor: "text-green-700" },
-  { status: "Sedang Diproses", icon: "⚙", color: "bg-blue-100", textColor: "text-blue-700" },
-  { status: "Dalam Perjalanan", icon: "🚛", color: "bg-yellow-100", textColor: "text-yellow-700" },
-  { status: "Sudah Tiba", icon: "✓", color: "bg-purple-100", textColor: "text-purple-700" },
+  { status: "Pesanan Dikonfirmasi", Icon: CheckCircle, color: "bg-green-100", textColor: "text-green-700", iconColor: "text-green-700" },
+  { status: "Sedang Diproses", Icon: Cog, color: "bg-blue-100", textColor: "text-blue-700", iconColor: "text-blue-700" },
+  { status: "Dalam Perjalanan", Icon: Truck, color: "bg-amber-100", textColor: "text-amber-700", iconColor: "text-amber-700" },
+  { status: "Sudah Tiba", Icon: Home, color: "bg-purple-100", textColor: "text-purple-700", iconColor: "text-purple-700" },
 ];
 
 export default function DeliveryPage({ searchParams }: PageProps) {
-  const totalPrice = searchParams.total || "0";
+  const totalPrice = parseInt(searchParams.total || "0");
   const itemCount = searchParams.items || "0";
   const currentStep = 2; // Dalam Perjalanan
 
@@ -40,7 +40,7 @@ export default function DeliveryPage({ searchParams }: PageProps) {
           <div className="bg-gray-50 rounded-lg p-6 mb-8">
             <p className="text-gray-600 mb-2">Total Pesanan</p>
             <p className="text-4xl md:text-5xl font-bold text-[#EC6530] mb-4">
-              Rp {parseInt(totalPrice).toLocaleString()}
+              Rp {totalPrice.toLocaleString()}
             </p>
             <p className="text-sm text-gray-500">{itemCount} item akan sampai dalam 30-45 menit</p>
           </div>
@@ -55,40 +55,45 @@ export default function DeliveryPage({ searchParams }: PageProps) {
             <h2 className="text-lg font-bold text-gray-900 mb-6">Riwayat Pengiriman</h2>
 
             <div className="space-y-4">
-              {statusSteps.map((step, index) => (
-                <div key={index} className="flex items-center gap-4">
-                  {/* Circle */}
-                  <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold transition-all ${
-                    index <= currentStep ? step.color + " " + step.textColor : "bg-gray-100 text-gray-400"
-                  }`}>
-                    {step.icon}
-                  </div>
+              {statusSteps.map((step, index) => {
+                const Icon = step.Icon;
+                const isActive = index <= currentStep;
 
-                  {/* Status Info */}
-                  <div className="flex-1">
-                    <p className={`font-semibold transition-colors ${
-                      index <= currentStep ? "text-gray-900" : "text-gray-400"
+                return (
+                  <div key={index} className="flex items-start gap-4 relative">
+                    {/* Connecting line */}
+                    {index < statusSteps.length - 1 && (
+                      <div
+                        className={`absolute left-6 top-12 w-1 h-8 ${
+                          index < currentStep ? "bg-[#EC6530]" : "bg-gray-200"
+                        }`}
+                      ></div>
+                    )}
+
+                    {/* Status circle with icon */}
+                    <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-all ${
+                      isActive ? step.color : "bg-gray-100"
                     }`}>
-                      {step.status}
-                    </p>
-                    {index === currentStep && (
-                      <p className="text-sm text-[#EC6530] font-medium">Sedang berlangsung</p>
-                    )}
-                    {index < currentStep && (
-                      <p className="text-sm text-green-600">Selesai</p>
-                    )}
-                  </div>
+                      <Icon size={24} className={isActive ? step.iconColor : "text-gray-400"} />
+                    </div>
 
-                  {/* Line connector */}
-                  {index < statusSteps.length - 1 && (
-                    <div className={`absolute left-6 h-12 w-1 ${
-                      index < currentStep ? "bg-green-500" : "bg-gray-200"
-                    }`} style={{
-                      marginTop: "3rem"
-                    }}></div>
-                  )}
-                </div>
-              ))}
+                    {/* Status info */}
+                    <div className="flex-1 pt-1">
+                      <p className={`font-semibold transition-colors ${
+                        isActive ? "text-gray-900" : "text-gray-400"
+                      }`}>
+                        {step.status}
+                      </p>
+                      {index === currentStep && (
+                        <p className="text-sm text-[#EC6530] font-medium">Sedang berlangsung</p>
+                      )}
+                      {index < currentStep && (
+                        <p className="text-sm text-green-600">Selesai</p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -96,11 +101,21 @@ export default function DeliveryPage({ searchParams }: PageProps) {
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
             <h3 className="font-bold text-gray-900 mb-4">Informasi Kurir</h3>
             <div className="flex items-center gap-4">
-              <div className="text-5xl">👨‍💼</div>
-              <div>
+              <div className="w-14 h-14 rounded-full bg-[#EC6530] flex items-center justify-center text-white text-2xl font-bold">
+                EK
+              </div>
+              <div className="flex-1">
                 <p className="font-semibold text-gray-900">Eko Prasetyo</p>
-                <p className="text-sm text-gray-600">Rating: ⭐⭐⭐⭐⭐ (4.9/5)</p>
-                <p className="text-sm text-gray-600 mt-2">Nomor HP: +62 812-3456-7890</p>
+                <div className="flex items-center gap-1 text-sm text-gray-600">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
+                  ))}
+                  <span className="ml-1">4.9/5</span>
+                </div>
+                <p className="text-sm text-gray-600 mt-2 flex items-center gap-2">
+                  <Phone size={14} />
+                  +62 812-3456-7890
+                </p>
               </div>
             </div>
           </div>
@@ -112,7 +127,7 @@ export default function DeliveryPage({ searchParams }: PageProps) {
             </button>
             <Link
               href="/"
-              className="w-full bg-white border border-gray-300 text-gray-900 py-3 rounded-lg font-semibold hover:bg-gray-50 transition text-center"
+              className="w-full bg-white border border-gray-300 text-gray-900 py-3 rounded-lg font-semibold hover:bg-gray-50 transition text-center block"
             >
               Kembali ke Home
             </Link>
