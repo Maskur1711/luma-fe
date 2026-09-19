@@ -21,20 +21,25 @@ export default function FeaturedProducts() {
   const handleAddToCart = (product: Product) => {
     const existingItem = cartItems.find(item => item.id === product.id);
     if (existingItem) {
-      // If product already in cart, update quantity (we'll handle this with a new field)
       setCartItems(cartItems.map(item =>
         item.id === product.id
           ? { ...item, quantity: (item.quantity || 1) + 1 }
           : item
       ));
     } else {
-      // Add new product to cart
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      const newItem: Product = {
+        ...product,
+        quantity: 1
+      };
+      setCartItems([...cartItems, newItem]);
     }
   };
 
-  const getTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + (item.price * (item.quantity || 1)), 0);
+  const getTotalPrice = (): number => {
+    const total = cartItems.reduce((sum, item) => {
+      return sum + (item.price * (item.quantity || 1));
+    }, 0);
+    return total;
   };
 
   const handleUpdateQuantity = (productId: number, newQuantity: number) => {
