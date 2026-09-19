@@ -6,7 +6,7 @@ export default function Header() {
     <header className="bg-[#FFAE6E] text-white sticky top-0 z-50 shadow-md">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="text-2xl font-bold tracking-tight">
-          🌙 Luna
+          Luma
         </Link>
 
         <nav className="hidden md:flex gap-8">

@@ -4,15 +4,11 @@ export default function About() {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="text-8xl">🌙</div>
-          </div>
-
-          <div>
             <h2 className="text-4xl font-bold text-white mb-6">
-              Tentang Luna Food
+              Tentang Luma
             </h2>
             <p className="text-lg text-white mb-4 leading-relaxed">
-              Luna Food adalah platform e-commerce makanan terpercaya yang menghadirkan berbagai pilihan makanan berkualitas premium langsung ke pintu Anda.
+              Luma adalah platform e-commerce makanan terpercaya yang menghadirkan berbagai pilihan makanan berkualitas premium langsung ke pintu Anda.
             </p>
             <p className="text-lg text-white mb-6 leading-relaxed">
               Kami berkomitmen untuk memberikan pengalaman berbelanja terbaik dengan produk segar, harga kompetitif, dan layanan pelanggan yang responsif.
